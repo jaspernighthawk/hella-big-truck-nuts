@@ -1,0 +1,38 @@
+---
+// src/pages/index.astro
+// ------------------------------------------------------------
+// THE HOMEPAGE.
+//
+// In Astro, anything in src/pages/ becomes a URL:
+//     src/pages/index.astro   ->  /
+//     src/pages/404.astro     ->  the "not found" page
+//     src/pages/[...slug].astro -> every other page (see that file)
+//
+// This replaces Hugo's layouts/index.html. The welcome text itself is
+// NOT in this file — it's in src/content/pages/home.md, so you can
+// edit it as Markdown without touching any code.
+// ------------------------------------------------------------
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageList from '../components/PageList.astro';
+import { getPublishedPages, childrenOf } from '../lib/pages';
+
+// Fetch the homepage text and turn its Markdown into HTML.
+const home = await getEntry('pages', 'home');
+if (!home) throw new Error('src/content/pages/home.md is missing!');
+const { Content } = await render(home);
+
+// The four top-level sections (about, blog, images, store).
+const sections = childrenOf('', await getPublishedPages());
+---
+
+<BaseLayout>
+  <!-- <Content /> is the rendered Markdown from home.md -->
+  <Content />
+
+  <!-- Hugo's homepage had a copy of the footer *here*, mid-page, and
+       then the real footer. That was almost certainly an accident, so
+       there's just the one footer now (it comes from BaseLayout). -->
+
+  <PageList heading="WHAT I GOT IN HERE:" pages={sections} />
+</BaseLayout>

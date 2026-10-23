@@ -1,0 +1,6 @@
+{
+  "// comment": "TypeScript settings. Astro's 'base' preset is the sensible default; you should never need to touch this file.",
+  "extends": "astro/tsconfigs/base",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}

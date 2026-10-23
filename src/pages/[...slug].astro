@@ -1,0 +1,61 @@
+---
+// src/pages/[...slug].astro
+// ------------------------------------------------------------
+// EVERY PAGE EXCEPT THE HOMEPAGE AND 404.
+//
+// The square brackets in the filename mean "this is a pattern, not a
+// literal URL". The three dots mean the pattern can span slashes.
+// So this one file produces /about/, /about/whoami/, /blog/specials/e/
+// and so on — one HTML file per Markdown file in the collection.
+//
+// It replaces BOTH of Hugo's layouts/_default/list.html and
+// single.html. Astro doesn't distinguish "list" and "single" pages;
+// instead we just ask "does this page have children?" and, if so,
+// list them under the content. A post with no children looks like a
+// Hugo single page; a section index.md looks like a Hugo list page.
+// ------------------------------------------------------------
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageList from '../components/PageList.astro';
+import { getPublishedPages, childrenOf, type Page } from '../lib/pages';
+
+// getStaticPaths tells Astro which URLs to build. It returns one
+// entry per page: the URL (`params.slug`) plus whatever data the
+// template below needs (`props`).
+export async function getStaticPaths() {
+  const allPages = await getPublishedPages();
+
+  return allPages
+    .filter((page) => page.id !== 'home')   // the homepage has its own file
+    .map((page) => ({
+      params: { slug: page.id },
+      props: { page, children: childrenOf(page.id, allPages) },
+    }));
+}
+
+interface Props {
+  page: Page;
+  children: Page[];
+}
+
+const { page, children } = Astro.props;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={`${page.data.title} · Hella Big Truck Nuts`}>
+  <article>
+    <!-- The old custom.css had `h1 { display: none }`, which hid every
+         page title on the live site. Presumably not on purpose, so
+         titles are visible again. -->
+    <h1>{page.data.title}</h1>
+
+    <!-- Hugo recorded the author but never displayed it. Now it does,
+         if the page has one. -->
+    {page.data.author && <p class="byline">by {page.data.author}</p>}
+
+    <Content />
+  </article>
+
+  <!-- Only sections (pages with children) get a list. -->
+  <PageList pages={children} />
+</BaseLayout>

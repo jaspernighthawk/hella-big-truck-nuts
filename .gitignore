@@ -1,0 +1,24 @@
+# .gitignore
+# ------------------------------------------------------------
+# Git tracks every file in this folder EXCEPT the ones listed here.
+# These are files that are either generated (so they can always be
+# rebuilt) or specific to your computer. Keeping them out of Git keeps
+# the repo small and keeps other people's machines from fighting yours.
+# ------------------------------------------------------------
+
+# The finished site that `npm run build` produces. Cloudflare rebuilds
+# this itself from the source, so there's no reason to store it.
+dist/
+
+# Downloaded code libraries (Astro itself and everything it depends on).
+# `npm install` recreates this folder from package.json in a minute.
+node_modules/
+
+# Astro's own cache / generated TypeScript helpers.
+.astro/
+
+# macOS Finder clutter.
+.DS_Store
+
+# Log files npm sometimes leaves behind.
+npm-debug.log*

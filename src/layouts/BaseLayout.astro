@@ -1,0 +1,67 @@
+---
+// src/layouts/BaseLayout.astro
+// ------------------------------------------------------------
+// HOW AN .astro FILE WORKS
+//
+// Every .astro file has two halves, split by the "---" fences:
+//
+//   1. Up here, between the fences, is JavaScript that runs ONCE,
+//      at build time, on your computer (or Cloudflare's). It never
+//      reaches the visitor's browser. Use it to import things and
+//      prepare data.
+//
+//   2. Below the fences is HTML, with {curly braces} wherever you
+//      want to drop in a value from the top half.
+//
+// WHAT THIS PARTICULAR FILE IS
+//
+// This is the "layout": the shell that wraps every single page.
+// In Hugo you had three near-identical files (index.html, list.html,
+// single.html) that each repeated the <html><head>... boilerplate.
+// Here it lives in one place. Pages use it like this:
+//
+//     <BaseLayout title="Some Title">
+//        ...page-specific HTML goes here...
+//     </BaseLayout>
+//
+// and whatever they put inside lands where you see <slot /> below.
+// ------------------------------------------------------------
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Importing a CSS file here makes Astro include it on every page
+// that uses this layout. (Hugo did this via head.html + config.toml.)
+import '../styles/global.css';
+
+// "Props" are the values a page hands to the layout, like function
+// arguments. Right now there's just one: the text for the browser tab.
+interface Props {
+  title?: string;
+}
+
+// If a page doesn't pass a title, fall back to the site name.
+// (The old Hugo templates had <title>Document</title> on every page —
+// that's the browser-tab text. Now it's the real page title.)
+const { title = 'Hella Big Truck Nuts' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- The pink banner. Lives in its own file so it's easy to find. -->
+    <Header />
+
+    <!-- <main> is where each page's unique content is inserted. -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- The gray bar pinned to the bottom of the window. -->
+    <Footer />
+  </body>
+</html>

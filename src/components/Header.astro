@@ -1,0 +1,20 @@
+---
+// src/components/Header.astro
+// ------------------------------------------------------------
+// The pink banner at the top of every page.
+//
+// This replaces Hugo's layouts/partials/header.html. The original
+// had all its styling crammed into style="..." attributes; those
+// now live in src/styles/global.css under ".site-header", which
+// means you can restyle the banner without touching this file.
+//
+// Note: the Hugo homepage said "HOME. OF. NUTS." while every other
+// page said "HELLA. BIG. TRUCK. NUTS." — there was no reason for the
+// difference, so now it's one banner everywhere. If you want the
+// homepage to differ again, pass a prop (see BaseLayout for how).
+// ------------------------------------------------------------
+---
+
+<header class="site-header">
+  <a href="/">HELLA. BIG. TRUCK. NUTS.</a>
+</header>

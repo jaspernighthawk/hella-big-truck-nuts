@@ -1,0 +1,35 @@
+---
+// src/components/PageList.astro
+// ------------------------------------------------------------
+// A bulleted list of links to pages. Used on the homepage (to list
+// the four sections) and on every section page (to list its posts).
+//
+// This replaces the little `{{ range .Pages }} ... {{ end }}` loop
+// that was copy-pasted into Hugo's index.html and list.html.
+// ------------------------------------------------------------
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  // An array of entries from the "pages" collection.
+  pages: CollectionEntry<'pages'>[];
+  // Optional heading shown above the list.
+  heading?: string;
+}
+
+const { pages, heading } = Astro.props;
+---
+
+{/* Only render anything if there are pages to list. */}
+{pages.length > 0 && (
+  <section class="page-list">
+    {heading && <h2>{heading}</h2>}
+    <ul>
+      {pages.map((page) => (
+        <li>
+          {/* Every URL gets a trailing slash to match astro.config.mjs */}
+          <a href={`/${page.id}/`}>{page.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
