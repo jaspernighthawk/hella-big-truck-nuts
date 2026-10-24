@@ -60,13 +60,9 @@ main img {
   height: auto;
 }
 
-/* Links inside the content. The old site let the browser pick
-   (default blue/purple), which was invisible on blue text — so
-   underline + bold makes them findable. */
-main a {
-  color: var(--blue);
-  font-weight: bold;
-}
+/* Links inside the content are deliberately left to the browser's
+   defaults (blue, purple once visited, underlined) — as on the old
+   site. Add a `main a { ... }` rule here if that ever changes. */
 
 /* The small "by Hannah" line under a post title. */
 .byline {

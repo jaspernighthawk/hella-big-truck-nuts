@@ -8,13 +8,18 @@
 // now live in src/styles/global.css under ".site-header", which
 // means you can restyle the banner without touching this file.
 //
-// Note: the Hugo homepage said "HOME. OF. NUTS." while every other
-// page said "HELLA. BIG. TRUCK. NUTS." — there was no reason for the
-// difference, so now it's one banner everywhere. If you want the
-// homepage to differ again, pass a prop (see BaseLayout for how).
+// The homepage banner reads "HOME. OF. NUTS."; every other page reads
+// "HELLA. BIG. TRUCK. NUTS." (Jasper's choice, carried over from Hugo).
+// The text arrives as a prop so each page can decide; if nothing is
+// passed, the default below is used.
 // ------------------------------------------------------------
+interface Props {
+  text?: string;
+}
+
+const { text = 'HELLA. BIG. TRUCK. NUTS.' } = Astro.props;
 ---
 
 <header class="site-header">
-  <a href="/">HELLA. BIG. TRUCK. NUTS.</a>
+  <a href="/">{text}</a>
 </header>
