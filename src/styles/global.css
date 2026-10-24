@@ -2,13 +2,16 @@
    ------------------------------------------------------------
    ALL of the site's styling, in one file.
 
-   In the Hugo version the look was split three ways: a custom.css
-   file, style="..." attributes glued onto the header and footer, and
-   nothing at all for most elements. Everything is gathered here now.
+   This version matches the Hugo site AS IT ACTUALLY RENDERED in 2021:
+   a browser-default page (white background, black text, the browser's
+   default serif — Times on most machines), a pink banner with white
+   text, and a gray bar fixed to the bottom of the window.
 
-   This first version is deliberately FAITHFUL to the 2021 site:
-   pink everywhere, blue text, white-on-pink banner, gray fixed footer.
-   Step III of the project is where we tear this up and have fun.
+   A note on history: the Hugo project also had static/css/custom.css
+   (pink body, blue text, hidden h1), but the partial that loaded it
+   was never called from any layout, so visitors never saw it. Those
+   rules are preserved at the very bottom of this file, commented out,
+   in case Jasper wants to switch them on.
 
    How to read a CSS rule:
        selector { property: value; }
@@ -20,11 +23,9 @@
 /* ============================================================
    1. CUSTOM PROPERTIES ("CSS variables")
    Define a color once up here, use it by name everywhere below.
-   Change --pink to #ff69b4 and the whole site follows.
    ============================================================ */
 :root {
-  --pink: pink;            /* body background and banner */
-  --blue: blue;            /* body text (yes, really) */
+  --pink: pink;            /* banner background */
   --white: white;          /* banner text, footer text */
   --footer-gray: #757575;  /* the fixed footer bar */
   --footer-height: 35px;   /* used twice below, so it's a variable */
@@ -33,36 +34,23 @@
 
 /* ============================================================
    2. THE PAGE ITSELF
+   Deliberately minimal. No font-family, no color, no max-width:
+   the browser's defaults ARE the design, as on the original.
+   (Browsers also add an 8px margin around <body>; that's why the
+   banner has a thin white gap around it. Kept, since Hugo had it.)
    ============================================================ */
 body {
-  margin: 0;                        /* browsers add 8px by default; remove it */
-  background-color: var(--pink);
-  color: var(--blue);
-
   /* Leave room at the bottom so the fixed footer never covers the
      last line of a page. (Hugo used an empty 35px <div> for this.) */
   padding-bottom: calc(var(--footer-height) + 20px);
-
-  font-family: system-ui, -apple-system, sans-serif;  /* the OS's default face */
-  line-height: 1.5;
 }
 
-/* <main> holds each page's unique content (see BaseLayout.astro). */
-main {
-  max-width: 48rem;      /* keep lines readable on wide screens */
-  margin: 0 auto;        /* ...and center the column */
-  padding: 1rem;
-}
-
-/* Images in posts: never wider than the column. */
+/* Images in posts: never wider than the window. (Approved fix —
+   the originals could overflow sideways.) */
 main img {
   max-width: 100%;
   height: auto;
 }
-
-/* Links inside the content are deliberately left to the browser's
-   defaults (blue, purple once visited, underlined) — as on the old
-   site. Add a `main a { ... }` rule here if that ever changes. */
 
 /* The small "by Hannah" line under a post title. */
 .byline {
@@ -73,22 +61,26 @@ main img {
 
 /* ============================================================
    3. THE PINK BANNER  (src/components/Header.astro)
-   The original was a <div> with inline styles; this is the same
-   look, expressed as a class on a proper <header> element.
+   Same numbers as the inline styles on Hugo's header <div>,
+   which held an <h1>; the font-size/margins below reproduce
+   the browser's default <h1> look inside that box.
    ============================================================ */
 .site-header {
   background-color: var(--pink);
   color: var(--white);
   text-align: center;
+  height: 75px;
   padding: 20px;
   text-transform: capitalize;
 }
 
 .site-header a {
+  display: block;
   color: var(--white);
   text-decoration: none;
-  font-size: 2em;            /* <h1>-sized, without being an <h1> */
+  font-size: 2em;            /* browser-default <h1> size */
   font-weight: bold;
+  margin: 0.67em 0 -10px;    /* default h1 top margin; Hugo's -10px bottom */
 }
 
 
@@ -101,7 +93,7 @@ main img {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;               /* Hugo had 99%, which left a sliver; 100% is intended */
+  width: 100%;               /* Hugo had 99%, which left a sliver */
   height: var(--footer-height);
   background-color: var(--footer-gray);
   color: var(--white);
@@ -118,15 +110,7 @@ main img {
 
 
 /* ============================================================
-   5. LISTS OF PAGES  (src/components/PageList.astro)
-   ============================================================ */
-.page-list h2 {
-  margin-top: 2rem;
-}
-
-
-/* ============================================================
-   6. YOUTUBE EMBEDS  (used in blog/j.md)
+   5. YOUTUBE EMBEDS  (used in blog/j.md)
    The aspect-ratio trick keeps the video 16:9 at any width.
    ============================================================ */
 .video {
@@ -139,3 +123,19 @@ main img {
   height: 100%;
   border: 0;
 }
+
+
+/* ============================================================
+   6. THE NEVER-LOADED custom.css FROM HUGO
+   Uncomment to see the site Jasper wrote but never saw.
+   ============================================================ */
+/*
+body {
+  background-color: pink;
+  color: blue;
+}
+
+h1 {
+  display: none;
+}
+*/
