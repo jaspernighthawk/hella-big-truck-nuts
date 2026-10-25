@@ -22,3 +22,7 @@ node_modules/
 
 # Log files npm sometimes leaves behind.
 npm-debug.log*
+
+# Obsidian's per-vault settings and workspace state, if you open
+# src/content/pages/ as a vault. Editor preferences, not site content.
+.obsidian/
