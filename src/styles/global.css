@@ -134,8 +134,26 @@ body {
   background-color: pink;
   color: blue;
 }
+*/
 
 h1 {
-  display: none;
+  color: black;
+  font-style: italic;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: pink;
+  
+}
+
+.byline {
+  color: pink;
+  font-variant: all-small-caps;
+  font-style: normal;
+}
+
+ul li::marker {
+  content: "∞ ";
+  color: pink;
+  font-size: .8em;
 }
 */

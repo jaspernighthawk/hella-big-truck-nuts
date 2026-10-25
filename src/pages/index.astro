@@ -26,6 +26,7 @@ const { Content } = await render(home);
 const sections = childrenOf('', await getPublishedPages());
 ---
 
+   <!-- This is where we get the custom banner text for this page -->
 <BaseLayout bannerText="HOME. OF. NUTS.">
   <!-- <Content /> is the rendered Markdown from home.md -->
   <Content />

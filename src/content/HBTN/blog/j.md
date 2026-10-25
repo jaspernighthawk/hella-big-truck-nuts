@@ -7,20 +7,7 @@ author: "Hannah's Ballz"
 
 My boy J-dog made this BADASS vid
 
-<!--
-  Hugo had a built-in {{< youtube ID >}} shortcode. Astro doesn't, but
-  Markdown is allowed to contain plain HTML, so here's the embed itself.
-  To embed a different video, swap the ID after /embed/ in the src.
--->
-<div class="video">
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/qu09TKSNso"
-    title="YouTube video"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen
-    loading="lazy"
-  ></iframe>
-</div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zqS4RZ7yiSE?si=E9_HmeSMBQrSKsLM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Plants YER!
 
