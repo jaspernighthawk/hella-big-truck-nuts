@@ -8,21 +8,31 @@ opened Terminal before. Sections 1–3 are what you need day to day;
 
 ## 1. The daily routine
 
-Every working session goes like this. Open Terminal and:
+Every working session goes like this. Open Terminal (it's in
+Applications → Utilities, or type "Terminal" into Spotlight). You'll
+see a line ending in `%` — that's the **prompt**, meaning Terminal is
+waiting for a command. Type or paste one line at a time and press
+Return after each:
 
 ```sh
 cd "/Users/jasperluna/Desktop/Claude Projects/Hella Big Truck Nuts/hbtn-astro"
 npm run dev
 ```
 
-Then open **http://localhost:4321/** in a browser. That's a live preview
-of the site running on your Mac. Edit any file and the browser updates
-by itself — no reloading, no rebuilding.
+The first line moves Terminal into the site's folder and prints nothing
+(no news is good news). The second starts the preview server and prints
+a few lines ending in `Local  http://localhost:4321/`. **The prompt
+doesn't come back** — the server has taken over this Terminal window
+and will keep printing a line for every page you visit. That's normal.
 
-Write, tweak, look. When you're happy:
+Open **http://localhost:4321/** in a browser. ("localhost" means "this
+computer"; the page exists only on your Mac.) Edit any file in BBEdit or
+Obsidian, save, and the browser updates by itself — no reloading, no
+rebuilding.
 
-ctrl-c to exit the server, then: 
-
+Write, tweak, look. When you're happy, stop the server so you can type
+commands again: click in the Terminal window and press **Ctrl+C**
+(Control, not Command). The prompt comes back. Then:
 
 ```sh
 git add -A
@@ -30,12 +40,39 @@ git commit -m "what changed"
 git push
 ```
 
-About a minute later the change is on the live site. To stop the
-preview, click in Terminal and press **Ctrl+C**.
+…replacing `what changed` with a few words describing the edit, in
+quotes. About a minute later the change is on the live site. Start the
+server again with `npm run dev` whenever you want to keep working.
+
+If you'd rather keep the server running while you commit, open a second
+Terminal tab with **Cmd+T**, `cd` into the folder there too, and use
+that tab for Git. Each tab has its own current folder.
 
 ---
 
 ## 2. Terminal cheat sheet
+
+### Terminal itself
+
+- **Return** runs the line you typed. Nothing happens until you press it.
+- **Up arrow** brings back the previous command; keep pressing for
+  older ones. Most days are the same four commands, so this is faster
+  than retyping.
+- **Tab** autocompletes a file or folder name. Type `cd "/Users/jas`
+  and press Tab.
+- Dragging a folder from Finder into the Terminal window pastes its
+  full path, quotes and all.
+- **Ctrl+C** stops whatever is running (the dev server, a stuck
+  command). It is *Control*, not Command. Cmd+C copies, as everywhere.
+- **`q`** gets you out of any screen that's taken over the window and
+  shows `:` or `(END)` at the bottom — `git log` and `git diff` do this.
+- **Cmd+K** clears the window. Purely cosmetic.
+- `zsh: command not found: xyz` means you typed something Terminal
+  doesn't recognize — usually a typo, or a command meant for a
+  different folder.
+- Terminal never asks "are you sure?" It does what you typed. The Git
+  commands in this guide are all safe; be careful with anything
+  starting `rm`, which deletes without a Trash.
 
 ### Getting there
 
