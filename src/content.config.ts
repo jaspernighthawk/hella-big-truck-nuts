@@ -22,7 +22,7 @@ const pages = defineCollection({
   //   src/content/HBTN/blog/j.md          -> id "blog/j"        -> /blog/j/
   //   src/content/HBTN/about/index.md     -> id "about"         -> /about/
   // (an index.md stands for its folder, just like Hugo's _index.md)
-  loader: glob({ pattern: '**/*.md', base: './src/content/HBTN' }),
+  loader: glob({ pattern: ['**/*.md', '!_templates/**'], base: './src/content/HBTN' }),
 
   // `z` is Zod, a little library for describing the shape of data.
   schema: z.object({
@@ -39,9 +39,9 @@ const pages = defineCollection({
 
     // These three were Hugo "taxonomies". We keep the data so nothing
     // is lost; whether to build tag pages is a decision for later.
-    tags: z.array(z.string()).optional(),
-    categories: z.array(z.string()).optional(),
-    moods: z.array(z.string()).optional(),
+   tags: z.array(z.string()).nullish(),
+categories: z.array(z.string()).nullish(),
+moods: z.array(z.string()).nullish(),
   }),
 });
 

@@ -129,10 +129,46 @@ A file named `index.md` is the page for its folder; any other file is
 a page inside that folder. The filename becomes the URL, so keep
 filenames lowercase with no spaces (`my-new-post.md`).
 
+### Editing in Obsidian
+
+The `HBTN` folder is an Obsidian vault, so you can write in Obsidian
+and let it handle the frontmatter as a form (the "Properties" panel at
+the top of each note: `draft` is a checkbox, `date` a date picker).
+BBEdit works just as well for the same files; Git doesn't care which
+you use. Obsidian won't open `.astro` or `.css` files — those are
+BBEdit's.
+
+Settings that matter, all under Settings → Files and links:
+
+- **Use [[Wikilinks]]: off.** Obsidian's `[[double bracket]]` links
+  mean nothing to Astro. With this off, Obsidian writes ordinary
+  Markdown links that work on the site.
+- **New link format: Relative path to file.**
+
+Things that render in Obsidian but come out as literal text on the
+site: callouts, `==highlights==`, `![[embeds]]`. Stick to standard
+Markdown. Images are the other gap — they live in `public/resources/`,
+outside the vault, so Obsidian can't preview them; see "Images" below.
+
+Obsidian keeps its own settings in a hidden `.obsidian/` folder inside
+the vault. Git is told to ignore it (`.gitignore`).
+
 ### Adding a post
 
-Create a new file in `src/content/HBTN/blog/` — say
-`furry-nuts.md` — and start it with a **frontmatter** block:
+**With the template (Obsidian):** make a new note in the `blog` folder,
+name it in lowercase with hyphens (`furry-nuts`), then Cmd+P →
+"Templates: Insert template" → `post`. That fills in the frontmatter
+with today's date and `draft: true`, so the post stays hidden until you
+untick it. Type the title, write, untick draft when ready.
+
+The template lives at `_templates/post.md` in the vault. Edit it to
+change what new posts start with. Astro is told to skip that folder by
+the `'!_templates/**'` entry in `src/content.config.ts` — without it,
+the template would be published as a page and its `{{date}}`
+placeholder would break the build.
+
+**By hand (any editor):** create `src/content/HBTN/blog/furry-nuts.md`
+and start it with a **frontmatter** block:
 
 ```markdown
 ---
@@ -224,8 +260,9 @@ Each file named here opens with a comment block saying the same thing
 in more detail.
 
 1. **`src/content.config.ts`** declares the *collection*: "read every
-   `.md` under `src/content/HBTN/`, and here's what frontmatter is
-   allowed." Astro reads the files and checks them against the rules.
+   `.md` under `src/content/HBTN/` (except `_templates/`), and here's
+   what frontmatter is allowed." Astro reads the files and checks them
+   against the rules.
 
 2. **`src/pages/[...slug].astro`** is the template that turns each
    entry into a page. The odd filename is a pattern: `[...slug]`
