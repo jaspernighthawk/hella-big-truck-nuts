@@ -21,6 +21,9 @@ by itself — no reloading, no rebuilding.
 
 Write, tweak, look. When you're happy:
 
+ctrl-c to exit the server, then: 
+
+
 ```sh
 git add -A
 git commit -m "what changed"
@@ -157,15 +160,25 @@ the vault. Git is told to ignore it (`.gitignore`).
 
 **With the template (Obsidian):** make a new note in the `blog` folder,
 name it in lowercase with hyphens (`furry-nuts`), then Cmd+P →
-"Templates: Insert template" → `post`. That fills in the frontmatter
+"Templates: Insert template" → `_post`. That fills in the frontmatter
 with today's date and `draft: true`, so the post stays hidden until you
 untick it. Type the title, write, untick draft when ready.
 
-The template lives at `_templates/post.md` in the vault. Edit it to
-change what new posts start with. Astro is told to skip that folder by
-the `'!_templates/**'` entry in `src/content.config.ts` — without it,
-the template would be published as a page and its `{{date}}`
-placeholder would break the build.
+The template lives at `_templates/_post.md` in the vault. Edit it to
+change what new posts start with — in **Source mode**, not the
+Properties panel, and keep the date line quoted
+(`date: "{{date:YYYY-MM-DD}}"`): unquoted, Obsidian reads the curly
+braces as YAML and mangles the placeholder.
+
+The leading underscore on `_post.md` matters. The pattern in
+`src/content.config.ts` is `**/[^_]*.md`, meaning "every .md file
+whose name does NOT start with an underscore." That's how the template
+stays out of the site; without it, the template would be published as
+a page and its `{{date}}` placeholder would break the build. Any file
+you name with a leading `_` gets the same treatment, which is a handy
+way to keep scratch notes in the vault. (A `!`-style exclusion in the
+pattern looks tidier but confuses Astro's file watcher; underscore is
+the reliable way.)
 
 **By hand (any editor):** create `src/content/HBTN/blog/furry-nuts.md`
 and start it with a **frontmatter** block:
@@ -260,7 +273,7 @@ Each file named here opens with a comment block saying the same thing
 in more detail.
 
 1. **`src/content.config.ts`** declares the *collection*: "read every
-   `.md` under `src/content/HBTN/` (except `_templates/`), and here's
+   `.md` under `src/content/HBTN/` (except names starting `_`), and here's
    what frontmatter is allowed." Astro reads the files and checks them
    against the rules.
 
