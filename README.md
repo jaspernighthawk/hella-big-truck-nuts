@@ -24,5 +24,5 @@ npm run build   # writes the finished static site into dist/
 | `src/content.config.ts`| Declares what frontmatter a page is allowed to have.         |
 | `astro.config.mjs`     | Site-wide settings (the site URL, trailing slashes).         |
 
-A fuller guide — how to add a post, change the styling, add components —
-lives in `GUIDE.md` (coming in step II of the project).
+The manual — daily routine, Git and npm explained, how to add posts,
+change the styling, and build components — is `GUIDE.md`.
