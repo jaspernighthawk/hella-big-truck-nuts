@@ -1,0 +1,27 @@
+// wrangler.jsonc
+// ------------------------------------------------------------
+// Settings for Cloudflare, which hosts the site. "Wrangler" is
+// Cloudflare's deploy tool; it reads this file when Cloudflare runs
+// `npx wrangler deploy` after each push to GitHub.
+//
+// The site is plain static files, so there's no code to run on
+// Cloudflare's side — this file just says "serve the dist/ folder."
+// (The .jsonc extension means JSON that allows comments like these.)
+// ------------------------------------------------------------
+{
+  // The project name as it appears in the Cloudflare dashboard.
+  "name": "hella-big-truck-nuts",
+
+  // Pins Cloudflare's runtime behavior to a date, so a future change
+  // on their end can't silently alter how the site is served.
+  "compatibility_date": "2026-10-01",
+
+  "assets": {
+    // Where `npm run build` puts the finished site.
+    "directory": "./dist",
+
+    // When a URL doesn't exist, serve our 404 page (src/pages/404.astro)
+    // instead of Cloudflare's generic one.
+    "not_found_handling": "404-page"
+  }
+}
