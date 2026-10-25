@@ -9,7 +9,7 @@
 //     src/pages/[...slug].astro -> every other page (see that file)
 //
 // This replaces Hugo's layouts/index.html. The welcome text itself is
-// NOT in this file — it's in src/content/pages/home.md, so you can
+// NOT in this file — it's in src/content/HBTN/home.md, so you can
 // edit it as Markdown without touching any code.
 // ------------------------------------------------------------
 import { getEntry, render } from 'astro:content';
@@ -19,7 +19,7 @@ import { getPublishedPages, childrenOf } from '../lib/pages';
 
 // Fetch the homepage text and turn its Markdown into HTML.
 const home = await getEntry('pages', 'home');
-if (!home) throw new Error('src/content/pages/home.md is missing!');
+if (!home) throw new Error('src/content/HBTN/home.md is missing!');
 const { Content } = await render(home);
 
 // The four top-level sections (about, blog, images, store).

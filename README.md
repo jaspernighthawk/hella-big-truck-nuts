@@ -15,7 +15,7 @@ npm run build   # writes the finished static site into dist/
 
 | Folder / file          | What it is                                                   |
 | ---------------------- | ------------------------------------------------------------ |
-| `src/content/pages/`   | **All the writing.** One Markdown file per page.             |
+| `src/content/HBTN/`   | **All the writing.** One Markdown file per page.             |
 | `src/pages/`           | Astro templates that turn the Markdown into HTML pages.      |
 | `src/layouts/`         | The shared page shell (`<html>`, `<head>`, header, footer).  |
 | `src/components/`      | Reusable chunks: Header, Footer, PageList.                   |

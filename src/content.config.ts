@@ -17,12 +17,12 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const pages = defineCollection({
-  // Read every .md file inside src/content/pages/, at any depth.
+  // Read every .md file inside src/content/HBTN/, at any depth.
   // Each file's "id" becomes its URL path, e.g.
-  //   src/content/pages/blog/j.md          -> id "blog/j"        -> /blog/j/
-  //   src/content/pages/about/index.md     -> id "about"         -> /about/
+  //   src/content/HBTN/blog/j.md          -> id "blog/j"        -> /blog/j/
+  //   src/content/HBTN/about/index.md     -> id "about"         -> /about/
   // (an index.md stands for its folder, just like Hugo's _index.md)
-  loader: glob({ pattern: '**/*.md', base: './src/content/pages' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/HBTN' }),
 
   // `z` is Zod, a little library for describing the shape of data.
   schema: z.object({

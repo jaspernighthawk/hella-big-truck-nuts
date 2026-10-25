@@ -23,7 +23,7 @@ Write, tweak, look. When you're happy:
 
 ```sh
 git add -A
-git commit -m "Add post about Tansy"
+git commit -m "what changed"
 git push
 ```
 
@@ -100,11 +100,11 @@ worked." Separate lines do the same thing.
 
 ### Where the words live
 
-All the site's text is Markdown files in `src/content/pages/`. The
+All the site's text is Markdown files in `src/content/HBTN/`. The
 folder structure *is* the site structure:
 
 ```
-src/content/pages/
+src/content/HBTN/
   home.md              ← the homepage's welcome text
   about/
     index.md           ← the About section page itself
@@ -120,13 +120,18 @@ src/content/pages/
   store/ …
 ```
 
+(`HBTN` is also the name of the Obsidian vault — the folder and the
+vault are the same thing. Astro is told where to look by one line in
+`src/content.config.ts`; rename the folder and that line must change
+too, or the dev server reports `home.md is missing`.)
+
 A file named `index.md` is the page for its folder; any other file is
 a page inside that folder. The filename becomes the URL, so keep
 filenames lowercase with no spaces (`my-new-post.md`).
 
 ### Adding a post
 
-Create a new file in `src/content/pages/blog/` — say
+Create a new file in `src/content/HBTN/blog/` — say
 `furry-nuts.md` — and start it with a **frontmatter** block:
 
 ```markdown
@@ -165,7 +170,7 @@ better to find out in the preview than on the live site.
 
 ### Adding a whole section
 
-Make a new folder under `src/content/pages/` with an `index.md` in
+Make a new folder under `src/content/HBTN/` with an `index.md` in
 it. It shows up on the homepage list automatically. Pages you add
 inside that folder show up on the section's page.
 
@@ -219,7 +224,7 @@ Each file named here opens with a comment block saying the same thing
 in more detail.
 
 1. **`src/content.config.ts`** declares the *collection*: "read every
-   `.md` under `src/content/pages/`, and here's what frontmatter is
+   `.md` under `src/content/HBTN/`, and here's what frontmatter is
    allowed." Astro reads the files and checks them against the rules.
 
 2. **`src/pages/[...slug].astro`** is the template that turns each

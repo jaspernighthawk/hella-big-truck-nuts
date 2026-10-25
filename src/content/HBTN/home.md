@@ -8,5 +8,3 @@ HELLO AND WELCOME TO THE PAGE OF HANNAH'S HELLA BIG TRUCK Nuts
 YOU CAN BUY EM HERE IF YOU GOT EM (YOU'LL Have Em)
 
 **************
-
-here's your links:
