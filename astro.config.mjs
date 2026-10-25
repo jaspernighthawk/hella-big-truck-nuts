@@ -10,7 +10,7 @@ export default defineConfig({
   // The final public address of the site. Astro uses this to build
   // absolute links in the sitemap and (later) the RSS feed.
   // Hugo had 'http://example.org/' here, which was a placeholder.
-  site: 'https://www.hellabigtrucknuts.com',
+  site: 'https://hellabigtrucknuts.com',
 
   // 'always' means every page URL ends in a slash: /blog/j/ not /blog/j
   // That matches how Hugo built the old site, so old links keep working,
