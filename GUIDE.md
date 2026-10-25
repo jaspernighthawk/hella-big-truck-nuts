@@ -2,7 +2,8 @@
 
 A manual for the site's owner. It assumes nothing except that you've
 opened Terminal before. Sections 1–3 are what you need day to day;
-4–7 are for when you want to change how the site works or looks.
+4–6 are for when you want to change how the site works or looks;
+7 is a map of where the site lives; 8 is for when things break.
 
 ---
 
@@ -455,7 +456,44 @@ goes. A layout is a component with a hole in it.
 
 ---
 
-## 7. When something goes wrong
+## 7. Where the site lives
+
+Three companies are involved, and each does one thing.
+
+**GitHub** (github.com/jaspernighthawk/hella-big-truck-nuts) holds the
+source: a copy of this folder and its full history. `git push` sends
+your commits here. If your Mac died tomorrow, this is the copy you'd
+rebuild from (`git clone` that URL onto a new machine, then
+`npm install`).
+
+**Cloudflare** (dash.cloudflare.com) builds and serves the site. It
+watches the GitHub repo; every push to `main` triggers a build
+(`npm run build`, then `npx wrangler deploy`, as set in
+`wrangler.jsonc`) and the result goes live a minute later. Under
+**Workers & Pages → hella-big-truck-nuts** you can see every
+deployment and its build log — the first place to look if a push
+doesn't show up on the site. Cloudflare also runs the domain's DNS
+(the records that say "hellabigtrucknuts.com means this Worker") and
+the redirect rule that sends `www.` to the bare domain. The site also
+answers at `hella-big-truck-nuts.silent-star-40b2.workers.dev`, which
+is handy for testing and harmless to leave on.
+
+**Squarespace** (account.squarespace.com → Domains) owns the name. You
+pay them yearly to keep `hellabigtrucknuts.com` registered. The only
+setting there that matters is **Nameservers**, which points at
+Cloudflare; its DNS page is empty and should stay that way. If
+Squarespace ever emails about renewal, that's the one thing to act on.
+
+The canonical address is **hellabigtrucknuts.com**, no `www`. That's
+set in three places that should agree: the redirect rule in
+Cloudflare, the `site` line in `astro.config.mjs`, and the footer link
+in `src/components/Footer.astro`.
+
+Nothing on any of these costs money except the yearly domain renewal.
+
+---
+
+## 8. When something goes wrong
 
 **The dev server prints a red error naming a `.md` file.** Almost
 always frontmatter: a missing `title`, a date it can't parse, a stray
