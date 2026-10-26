@@ -205,7 +205,7 @@ ul li::marker {
 /* Same animation, played backwards. */
 .spin-reverse {
   animation-direction: reverse;
-  animation-delay: -5s;
+  animation-delay: -18s;
 }
 
 /* Put the two side by side, centered. */
