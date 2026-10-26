@@ -41,6 +41,11 @@ const pages = defineCollection({
     tags: z.array(z.string()).nullish(),
     categories: z.array(z.string()).nullish(),
     moods: z.array(z.string()).nullish(),
+
+    // Section pages only (an index.md): when true, the list of pages
+    // inside this section shows each page's date after its title.
+    // Set `listDates: true` in the section's frontmatter to turn it on.
+    listDates: z.boolean().default(false),
   }),
 });
 

@@ -57,5 +57,7 @@ const { Content } = await render(page);
   </article>
 
   <!-- Only sections (pages with children) get a list. -->
-  <PageList pages={children} />
+  <!-- showDates comes from the section's own frontmatter (listDates),
+       so each section decides for itself. -->
+  <PageList pages={children} showDates={page.data.listDates} />
 </BaseLayout>

@@ -14,9 +14,26 @@ interface Props {
   pages: CollectionEntry<'pages'>[];
   // Optional heading shown above the list.
   heading?: string;
+  // When true, each item shows its date after the title.
+  // Section pages pass this from their `listDates` frontmatter field.
+  showDates?: boolean;
 }
 
-const { pages, heading } = Astro.props;
+const { pages, heading, showDates = false } = Astro.props;
+
+// Turn a Date into text for display. `page.data.date` is a real
+// JavaScript Date (content.config.ts coerces it), so any formatting is
+// possible. Change the options to change the style:
+//   { month: 'long',  day: 'numeric', year: 'numeric' } -> December 12, 2021
+//   { month: 'short', day: 'numeric', year: 'numeric' } -> Dec 12, 2021
+//   { year: 'numeric', month: '2-digit', day: '2-digit' } -> 12/12/2021
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    month: 'numeric',
+    day: 'numeric',
+    year: '2-digit',
+  });
+}
 ---
 
 {/* Only render anything if there are pages to list. */}
@@ -28,6 +45,14 @@ const { pages, heading } = Astro.props;
         <li>
           {/* Every URL gets a trailing slash to match astro.config.mjs */}
           <a href={`/${page.id}/`}>{page.data.title}</a>
+          {/* The date sits OUTSIDE the link, in HTML's <time> element.
+              `datetime` holds the machine-readable form; the visible
+              text comes from formatDate() above. Style it via .post-date */}
+          {showDates && (
+            <time class="post-date" datetime={page.data.date.toISOString()}>
+              {formatDate(page.data.date)}
+            </time>
+          )}
         </li>
       ))}
     </ul>

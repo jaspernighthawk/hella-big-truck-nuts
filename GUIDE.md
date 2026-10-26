@@ -518,5 +518,20 @@ it names (it's inside the hidden `.git` folder) and try again.
 **The site looks wrong but the file looks right.** Hard-refresh the
 browser (Cmd+Shift+R) to bypass its cache.
 
+**A frontmatter field you just added does nothing, with no error.**
+Astro keeps a cache of every page's checked frontmatter in the hidden
+`.astro/` folder, and after a change to `content.config.ts` it
+sometimes keeps the old version of a page. Stop the server (Ctrl+C),
+then:
+
+```sh
+rm .astro/data-store.json
+npm run dev
+```
+
+That file is disposable — Astro rebuilds it from your Markdown on
+every start. If things are still confusing, `rm -r .astro` removes the
+whole cache folder, equally safely.
+
 **Still stuck?** `git status` and the exact error text are the two
 things to paste to whoever's helping.
