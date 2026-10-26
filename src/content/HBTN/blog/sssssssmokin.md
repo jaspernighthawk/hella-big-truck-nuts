@@ -1,5 +1,5 @@
 ---
-title: ""
+title: sssssssmokin
 date: 2026-10-26
 author: Hannah
 draft: false
