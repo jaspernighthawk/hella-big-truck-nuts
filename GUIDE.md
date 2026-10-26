@@ -507,9 +507,42 @@ or just use the new address Astro offers (4322).
 your Mac doesn't (rare, since only you push). Run `git pull`, then
 `git push` again.
 
+**You pushed, but the live site didn't change.** Before anything
+else, open Workers & Pages → hella-big-truck-nuts → Deployments in
+the Cloudflare dashboard. A red row means the build failed and the
+previous version is still live; click it to read the log. A green row
+with an old timestamp means the push never arrived (`git status` should
+say "up to date with origin/main"). A green row with the right
+timestamp means it deployed and your browser is showing a cached copy:
+hard-refresh (Cmd+Shift+R) or use a private window.
+
 **Cloudflare's build turns red.** Open the deployment in the
 Cloudflare dashboard and read the log; the error is the same one
 `npm run build` would show you locally. Fix, commit, push; it rebuilds.
+
+**The build is red with "Could not find requested image" (or
+"Duplicate id"), but it works on your Mac.** Capital letters. Your Mac
+treats `Photo.jpg` and `photo.jpg` as the same file; Cloudflare builds
+on Linux, which treats them as different files. Two ways this bites:
+
+- A link says `photo.jpg` and the file is `Photo.jpg`. Works locally,
+  fails on Cloudflare. Fix: make them match (lowercase both).
+- You renamed `Photo.jpg` to `photo.jpg`, but Git didn't notice —
+  on a Mac, a capitalization-only rename looks like no change at all,
+  so Git keeps the old name and Cloudflare checks out `Photo.jpg`.
+  Fix: tell Git explicitly, then commit:
+
+  ```sh
+  git rm --cached public/resources/Photo.jpg
+  git add public/resources/photo.jpg
+  ```
+
+  (`--cached` means "forget it in Git, but leave the file on disk.")
+  `git status` then shows the rename as `R  Photo.jpg -> photo.jpg`.
+
+The prevention is the filename rule: lowercase, hyphens, no spaces,
+from the moment a file is created. Obsidian's attachment folder
+should be `attachments`, not `Attachments`.
 
 **Git says something about a `.lock` file.** A previous Git command was
 interrupted. Make sure no Git command is running, then delete the file
