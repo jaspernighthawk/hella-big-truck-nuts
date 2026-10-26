@@ -11,6 +11,6 @@ moods:
 ---
 I'm proud to be an Americin
 
-![a photo of a trucknuts with American flags all over it](Attachments/old-glory-nuts.jpeg)
+![a photo of a trucknuts with American flags all over it](attachments/old-glory-nuts.jpeg)
 
 [**Back**](../)

@@ -9,7 +9,7 @@ categories: []
 moods:
   - Proud old Boy
 ---
-![](Attachments/Double-nut.jpg)Why ever why did he need to double up ?? 🤣🤣🤣🤣🤣🤣
+![](attachments/double-nut.jpg)Why ever why did he need to double up ?? 🤣🤣🤣🤣🤣🤣
 
 ![A photo of a white truck with a fleshy trucknuts and hanging from that a golden trucknuts](Attachments/Double-nut.jpg)
 

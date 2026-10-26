@@ -12,6 +12,6 @@ moods:
 ---
 Long john Silver he AIN'T. But nice to see a Nissan gettin his due.
 
-![a photo of a Nissan truck with silver trucknuts a danglin](Attachments/silvernuts.webp)
+![a photo of a Nissan truck with silver trucknuts a danglin](attachments/silvernuts.webp)
 
 [**Back**](../)
