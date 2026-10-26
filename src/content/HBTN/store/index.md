@@ -1,8 +1,8 @@
 ---
-title: "Hellza Stuff To Buy"
+title: Hellza Stuff To Buy
 date: 2021-12-12T14:18:53-08:00
 draft: false
-author: "Hannah"
+author:
 ---
 
 Biuy em if you got em. We got:
