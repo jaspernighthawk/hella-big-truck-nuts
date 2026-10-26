@@ -2,7 +2,7 @@
 title: I Put Truck Nuts on My Truck Nuts (BUT WHY)
 date: 2026-10-25
 author: Hannah
-draft: true
+draft: false
 tags:
   - nuts
 categories: []
