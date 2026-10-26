@@ -72,17 +72,40 @@ main img {
   height: 75px;
   padding: 20px;
   text-transform: capitalize;
+  /* The suggested styling for the bouncing side-items */
+  display: flex;                 /* children line up in a row */
+  align-items: center;           /* …vertically centered in the box */
+  justify-content: center;       /* …and the group sits in the middle */
+  gap: 2rem;                     /* space between the three items */
 }
 
-.site-header a {
-  display: block;
+.site-header .site-title {       /* was: .site-header a */
   color: var(--white);
   text-decoration: none;
-  font-size: 2em;            /* browser-default <h1> size */
+  font-size: 2em;
   font-weight: bold;
-  margin: 0.67em 0 -10px;    /* default h1 top margin; Hugo's -10px bottom */
+  /* margin and display lines deleted */
 }
 
+/* Define the motion: start at rest, rise 10px at the halfway point,
+   settle back. Percentages are "how far through one cycle." */
+@keyframes bounce {
+  0%, 100% { transform: translateY(20px); }
+  50%      { transform: translateY(-20px); }
+}
+
+.nav-bounce {
+  font-style: italic;
+  font-size: 1em;
+  color: var(--white);
+  text-decoration: none;
+  text-transform: lowercase;
+  font-weight: bold;
+  /* name, duration of one cycle, easing, how many times */
+  animation: bounce 3s linear infinite;
+}
+
+.nav-bounce:last-child { animation-delay: .8s; }
 
 /* ============================================================
    4. THE GRAY FOOTER  (src/components/Footer.astro)
@@ -136,7 +159,7 @@ body {
 }
 */
 
-h1 {
+h1, h2 {
   color: black;
   font-style: italic;
   font-weight: 900;
