@@ -12,3 +12,5 @@ moods:
 There are times, which I know as the WIZARD TIMES, when you could cry, but you could also shoot a feckin fayerball (Scottish accent) out of your fingertips.
 
 Yeah, did you know I can SPELL now?
+
+[**Back**](../)
