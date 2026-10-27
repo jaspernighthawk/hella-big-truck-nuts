@@ -34,7 +34,7 @@ const pages = defineCollection({
     // Everything below is optional. `.default(false)` means a page
     // with no `draft:` line counts as published.
     draft: z.boolean().default(false),
-    author: z.string().optional(),
+    author: z.string().nullish(),   // nullish: Obsidian writes an empty field as null
 
     // These three were Hugo "taxonomies". We keep the data so nothing
     // is lost; whether to build tag pages is a decision for later.
